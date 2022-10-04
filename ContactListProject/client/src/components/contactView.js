@@ -1,23 +1,19 @@
-// import { useState } from "react";
+// import { useState, useEffect } from "react";
 
 
-// const ViewCard = (props, {viewCallback}) => {
+// const ViewCard = ({ dltContactCallback }) => {
 
 //   //VIEW
-//   const [viewContactId, setViewContactId] = useState(false);
-  
-//   const [viewFirstName, setViewFirstName] = useState('');
-//   const [viewLastName, setViewLastName] = useState('');
-//   const [viewEmail, setViewEmail] = useState('');
-//   const [viewPhoneNumber, setViewPhoneNumber] = useState('');
-//   const [viewNotes, setViewNotes] = useState('');
+//   const [viewContact, setViewContact] = useState(false);
 
-//   const handleView = (e) => {
-//     e.preventDefault();
-//     viewCallback(contact.id);
-//     setViewContactId(false);
+//   useEffect(() => {
+//     fetch("http://localhost:5002/contacts")
+//       .then((response) => response.json())
+//       .then((viewContact) => {
+//         setViewContact(viewContact);
+//       });
+//   }, []);
 
-//   }
 
 //   return (
 //     <table className="listofcontacts-table">
@@ -34,8 +30,8 @@
 //       </thead>
 //       <tbody>
 //         {/* Display all Individuals here */}
-//         {props.individualContact.map((contact, index) => {
-//           if (contact.id === viewContactId) {
+//         {viewContact.map((contact, index) => {
+//           if (contact.id === viewContact) {
 //             return (
 //               <tr key={index}>
 //                 <td>{contact.id} </td>
@@ -44,7 +40,7 @@
 //                 <td>{contact.email} </td>
 //                 <td>{contact.phone_number} </td>
 //                 <td> {contact.notes} </td>
-//                 <td><button onClick={() => setViewContactId(true)}>View</button></td>
+//                 <td><button onClick={() => setViewContact(true)}>View</button></td>
 //               </tr>
 //             );
 //           } else {
@@ -53,8 +49,8 @@
 //                 <td>{contact.id} </td>
 //                 <td> {contact.first_name} </td>
 //                 <td> {contact.last_name} </td>
-//                 <td> <button className="delete-button" onClick={() => handleDeleteContact(contact.id)}>Delete</button> <button>Edit</button> </td>
-//                 <td><button onClick={() => setViewContactId(contact.id)}>View</button></td>
+//                 <td> <button className="delete-button" onClick={() => dltContactCallback = { dltContactCallback }}>Delete</button> <button>Edit</button> </td>
+//                 <td><button onClick={() => setViewContact(contact.id)}>View</button></td>
 //               </tr>
 //             );
 //           };

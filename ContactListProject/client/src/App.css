@@ -5,6 +5,9 @@ body{
   background-color: rgb(210, 186, 255);
   color:#9d1235;
 }
+header{
+  background-color: #9d1235;
+}
 
 /******************** BUTTONS **********************/
 button{

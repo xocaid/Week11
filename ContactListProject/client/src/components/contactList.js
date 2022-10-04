@@ -104,10 +104,10 @@ const ContactList = () => {
     setIndividualContact(deleteContactFunction);
   }
   //VIEW
-  const [viewContactId, setViewContactId] = useState();
+  const [viewContactId, setViewContactId] = useState('');
 
   //SEARCH BAR - create variable
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
 
 
 
@@ -120,29 +120,38 @@ const ContactList = () => {
         <input
           type="text"
           placeholder="Search..."
-          onChange={(e) => {setSearchInput(e.target.value)}}
+          onChange={(e) => { setSearchInput(e.target.value) }}
         />
 
         <table className="listofcontacts-table">
           <thead>
             <tr className='table-heading'>
               {/* Instead of listing each individual header, map it out. */}
-              {['ID', 'First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', '', ''].map((item) => (
-                <th key={item}>
-                  {item}
-                </th>
-              ))
-              }
+              {/* If/else can't be used so had to use && as per googling, it's working*/}
+              {viewContactId != '' &&
+                ['ID', 'First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', '', ''].map((item) => (
+                  <th key={item}>
+                    {item}
+                  </th>
+                ))
+              ||
+              viewContactId === '' &&
+                ['ID', 'First Name', 'Last Name', ''].map((item) => (
+                  <th key={item}>
+                    {item}
+                  </th>
+                ))
+                }
             </tr>
           </thead>
 
           <tbody>
             {/* DISPLAY CONTACTS LIST */}
             {/* FILTER FOR SEARCH INPUT - first & last name, email, phone# */}
-            {individualContact.filter((value) =>{
-              if(searchInput == ""){
+            {individualContact.filter((value) => {
+              if (searchInput == "") {
                 return value
-              }else if(value.first_name.toLowerCase().includes(searchInput.toLowerCase()) || value.last_name.toLowerCase().includes(searchInput.toLowerCase()) || value.email.toLowerCase().includes(searchInput.toLowerCase()) || value.phone_number.toLowerCase().includes(searchInput.toLowerCase()) ){
+              } else if (value.first_name.toLowerCase().includes(searchInput.toLowerCase()) || value.last_name.toLowerCase().includes(searchInput.toLowerCase()) || value.email.toLowerCase().includes(searchInput.toLowerCase()) || value.phone_number.toLowerCase().includes(searchInput.toLowerCase())) {
                 return value
               }
             }).map((contact, index) => {
@@ -155,7 +164,7 @@ const ContactList = () => {
                     <td>{contact.email} </td>
                     <td>{contact.phone_number} </td>
                     <td> {contact.notes} </td>
-                    <td><button onClick={() => setViewContactId(true)}>View</button></td>
+                    <td><button onClick={() => setViewContactId('')}>View</button></td>
                   </tr>
                 );
               } else {

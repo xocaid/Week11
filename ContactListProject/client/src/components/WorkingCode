@@ -1,4 +1,4 @@
-        <!-- <table className="listofcontacts-table">
+        <table className="listofcontacts-table">
           <thead>
             <tr className='table-heading'>
               {/* Instead of listing each individual header, map it out. */}
@@ -41,4 +41,4 @@
             };
           })}
           </tbody>
-        </table> -->
+        </table>
