@@ -1,5 +1,6 @@
 import { useState, useReducer, useEffect } from "react";
 
+
 const reducer = (state, action) => {
   console.log(action, 'this is the action');
   switch (action.type) {
@@ -78,6 +79,7 @@ const ContactList = () => {
       phone_number: state.phone_number,
       notes: state.notes
     };
+    setSearchInput(e.target.value);
 
     const response = await fetch('http://localhost:5002/contacts', {
       method: 'POST',
@@ -92,7 +94,7 @@ const ContactList = () => {
     dispatch({ type: 'clearForm' })
   };
 
-  //DELETE EVENT  - EVENT HANDLER
+  // DELETE EVENT  - EVENT HANDLER
   const handleDeleteContact = async (dltContactCallback) => {
     const response = await fetch(`http://localhost:5002/contacts/${dltContactCallback}`, {
       method: 'DELETE',
@@ -102,56 +104,80 @@ const ContactList = () => {
     setIndividualContact(deleteContactFunction);
   }
   //VIEW
-  const [selectContactId, setSelectContactId] = useState();
+  const [viewContactId, setViewContactId] = useState();
+
+  //SEARCH BAR - create variable
+  const [searchInput, setSearchInput] = useState("");
+
+
 
   return (
     <section className="listofcontacts-page">
       <h2>List of Contacts</h2>
       <div>
         <h3>All Individuals</h3>
+
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={(e) => {setSearchInput(e.target.value)}}
+        />
+
         <table className="listofcontacts-table">
           <thead>
             <tr className='table-heading'>
               {/* Instead of listing each individual header, map it out. */}
-               {['ID', 'First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', '', ''].map((item) => (
-                  <th key={item}>
-                    {item}
-                  </th>
-                ))
+              {['ID', 'First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', '', ''].map((item) => (
+                <th key={item}>
+                  {item}
+                </th>
+              ))
               }
             </tr>
           </thead>
+
           <tbody>
-            {/* Display all Individuals here */}
-            {individualContact.map((contact, index) => {
-              if(contact.id === selectContactId){
-                return(
-                <tr key={index}>
-                  <td>{contact.id} </td>
-                  <td> {contact.first_name} </td>
-                  <td> {contact.last_name} </td>
-                  <td>{contact.email} </td>
-                  <td>{contact.phone_number} </td>
-                  <td> {contact.notes} </td>
+            {/* DISPLAY CONTACTS LIST */}
+            {/* FILTER FOR SEARCH INPUT - first & last name, email, phone# */}
+            {individualContact.filter((value) =>{
+              if(searchInput == ""){
+                return value
+              }else if(value.first_name.toLowerCase().includes(searchInput.toLowerCase()) || value.last_name.toLowerCase().includes(searchInput.toLowerCase()) || value.email.toLowerCase().includes(searchInput.toLowerCase()) || value.phone_number.toLowerCase().includes(searchInput.toLowerCase()) ){
+                return value
+              }
+            }).map((contact, index) => {
+              if (contact.id === viewContactId) {
+                return (
+                  <tr key={index}>
+                    <td>{contact.id} </td>
+                    <td> {contact.first_name} </td>
+                    <td> {contact.last_name} </td>
+                    <td>{contact.email} </td>
+                    <td>{contact.phone_number} </td>
+                    <td> {contact.notes} </td>
+                    <td><button onClick={() => setViewContactId(true)}>View</button></td>
                   </tr>
                 );
-              }else{
-              return (
-                <tr key={index}>
-                  <td>{contact.id} </td>
-                  <td> {contact.first_name} </td>
-                  <td> {contact.last_name} </td>
-                  {/* <td>{contact.email} </td>
+              } else {
+                return (
+                  <tr key={index}>
+                    <td>{contact.id} </td>
+                    <td> {contact.first_name} </td>
+                    <td> {contact.last_name} </td>
+                    {/* <td>{contact.email} </td>
                   <td>{contact.phone_number} </td>
                   <td> {contact.notes} </td> */}
-                  <td> <button className="delete-button" onClick={() => handleDeleteContact(contact.id)}>Delete</button> <button>Edit</button> </td>
-                  <td><button onClick={() => setSelectContactId(contact.id)}>View</button></td>
-                </tr>
-              );
-            };
-          })}
+                    <td> <button className="delete-button" onClick={() => handleDeleteContact(contact.id)}>Delete</button> <button>Edit</button> </td>
+                    <td><button onClick={() => setViewContactId(contact.id)}>View</button></td>
+                  </tr>
+                );
+              };
+            })}
           </tbody>
         </table>
+
+
+
         <div className="AddContactDiv">
           <h3>Add Contact</h3>
           <form id="add-contact" className="formborder" action="#" onSubmit={handleAddIndivdualContact}>

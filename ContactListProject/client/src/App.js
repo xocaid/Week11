@@ -5,10 +5,13 @@ import Footer from "./components/margins/footer.js";
 import ContactList from "./components/contactList";
 
 
+
 function App() {
   return (
     <div className="App">
 <Header />
+
+
 <ContactList />
 <Footer />
     </div>
