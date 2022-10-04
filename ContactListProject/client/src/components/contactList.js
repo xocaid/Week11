@@ -101,6 +101,8 @@ const ContactList = () => {
     const deleteContactFunction = individualContact.filter((i) => i.id !== dltContactCallback);
     setIndividualContact(deleteContactFunction);
   }
+  //VIEW
+  const [selectContactId, setSelectContactId] = useState();
 
   return (
     <section className="listofcontacts-page">
@@ -111,7 +113,7 @@ const ContactList = () => {
           <thead>
             <tr className='table-heading'>
               {/* Instead of listing each individual header, map it out. */}
-               {['ID', 'First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', ''].map((item) => (
+               {['ID', 'First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', '', ''].map((item) => (
                   <th key={item}>
                     {item}
                   </th>
@@ -122,7 +124,8 @@ const ContactList = () => {
           <tbody>
             {/* Display all Individuals here */}
             {individualContact.map((contact, index) => {
-              return (
+              if(contact.id === selectContactId){
+                return(
                 <tr key={index}>
                   <td>{contact.id} </td>
                   <td> {contact.first_name} </td>
@@ -130,10 +133,23 @@ const ContactList = () => {
                   <td>{contact.email} </td>
                   <td>{contact.phone_number} </td>
                   <td> {contact.notes} </td>
+                  </tr>
+                );
+              }else{
+              return (
+                <tr key={index}>
+                  <td>{contact.id} </td>
+                  <td> {contact.first_name} </td>
+                  <td> {contact.last_name} </td>
+                  {/* <td>{contact.email} </td>
+                  <td>{contact.phone_number} </td>
+                  <td> {contact.notes} </td> */}
                   <td> <button className="delete-button" onClick={() => handleDeleteContact(contact.id)}>Delete</button> <button>Edit</button> </td>
+                  <td><button onClick={() => setSelectContactId(contact.id)}>View</button></td>
                 </tr>
               );
-            })}
+            };
+          })}
           </tbody>
         </table>
         <div className="AddContactDiv">
@@ -189,7 +205,7 @@ const ContactList = () => {
                 type="text"
                 id="editEmail"
                 placeholder="jsmith@gmail.com"
-                value={state.seen_on}
+                value={state.email}
                 onChange={(e) =>
                   dispatch({
                     type: "editEmail",
