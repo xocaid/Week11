@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import User from "./users/user";
 
 const MainWeather = () => {
 
@@ -6,8 +7,8 @@ const MainWeather = () => {
   const [zipWeather, setZipWeather] = useState(null);
 
   //SEARCH BAR - create variable
-  const [searchInput, setSearchInput] = useState('');
-  
+  // const [searchInput, setSearchInput] = useState('');
+
   // FETCH Request
   const loadData = () => {
     fetch('http://localhost:5003/weather')
@@ -32,12 +33,7 @@ const MainWeather = () => {
 
   return (
     <div>
-    <h1>WeatherMain</h1>
-    <input
-          type="text"
-          placeholder="Search..."
-          onChange={(e) => { setSearchInput(e.target.value) }}
-        />
+<User />
     </div>
   )
   }

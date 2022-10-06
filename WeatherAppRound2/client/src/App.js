@@ -1,11 +1,14 @@
 import './App.css';
 import MainWeather from './components/mainWeather';
+import Header from './components/margins/header';
+import Footer from './components/margins/footer';
 
 function App() {
   return (
     <div className="App">
-<h1>Weather App Round 2</h1>
-<MainWeather />
+      <Header />
+      <MainWeather />
+      <Footer />
     </div>
   );
 }

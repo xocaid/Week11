@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
     const user = await db.any("SELECT * FROM users ORDER BY id", [true]);
     res.send(user);
   } catch (e) {
+    console.log(e);
     return res.status(400).json({ e });
   }
 });
