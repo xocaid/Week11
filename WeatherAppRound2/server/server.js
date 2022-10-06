@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 const MY_KEY = process.env.REACT_APP_API_KEY;
 
 app.get('/weather', (req, res) => {
-  const url = `https://api.openweathermap.org/data/2.5/forecast/daily?zip=90016,us&APPID=${MY_KEY}&units=imperial&cnt=2`;
+  const url = `https://api.openweathermap.org/data/2.5/forecast/daily?zip=90016,us&APPID=${MY_KEY}&units=imperial&cnt=3`;
 
   fetch(url)
     .then((response) => response.json())

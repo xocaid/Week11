@@ -43,22 +43,39 @@ function User() {
   //   setUsers(deleteUserFunction);
   // };
 
-  //SEARCH USER
-  // const [viewUserId, setViewUserId] = useState();
+  //SEARCH BAR - Users
+  const [searchUsers, setSearchUsers] = useState('');
 
   return (
     <div>
       <div className='users-container'>
         <h3>Users</h3>
+
+        {/* Search Bar  */}
+        <input
+          type="text"
+          placeholder="Search Users..."
+          onChange={(e) => { setSearchUsers(e.target.value) }}
+        />
+        {/* Search Filter,  Username List Mapped */}
         <ul id="users">
-          {users.map((user, index) => {
+          {users.filter((value) => {
+            if (searchUsers === "") {
+              return value
+            } else if (value.username.toLowerCase().includes(searchUsers.toLowerCase())) {
+              return value
+            }
+          }).map((user, index) => {
             return (
-              <li key={index}> {user.username}
-              </li>);
+              <li key={index}>
+                {user.username}
+              </li>
+            );
           })}
         </ul>
       </div>
 
+      {/* See Add Form Button */}
       {seeAddForm ? (
         <AddUser addContact={handleAddUser} />
       ) : (<button type="viewAdd" onClick={handleButton}>Add User</button>)
