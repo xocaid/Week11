@@ -12,12 +12,13 @@ function User() {
     email: ""
   };
 
+  const getUsers = async () => {
+    const response = await fetch(`http://localhost:5003/users`);
+    const user = await response.json();
+    setUsers(user);
+  };
   useEffect(() => {
-    fetch("http://localhost:5003/users")
-      .then((response) => response.json())
-      .then((user) => {
-        setUsers(user);
-      });
+    getUsers();
   }, []);
 
   //ADD USER - EVENT HANDLER
@@ -27,7 +28,7 @@ function User() {
 
   // //DELETE USER - EVENT HANDLER
   // const handleDeleteContact = async (deleteUserCallback) => {
-  //   const response = await fetch(`http://localhost:5003/users/${deleteUserCallback}`, {
+  //   const response = await fetch(`http://localhost:3001/users/${deleteUserCallback}`, {
   //     method: 'DELETE',
   //   })
   //   await response.json();
@@ -47,7 +48,9 @@ function User() {
             </li>);
         })}
       </ul> */}
-      <p>{users.first_name}</p>
+
+<h1>hello world</h1>
+[{users.username}]
 
       <AddUser addContact={handleAddUser} />
 

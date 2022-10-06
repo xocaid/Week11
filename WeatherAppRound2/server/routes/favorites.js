@@ -6,7 +6,7 @@ const router = Router();
 //GET Request - FAVORITES
 router.get("/", async (req, res) => {
   try {
-    const favoriteCity = await db.any("SELECT * FROM favorites ORDER BY id", [true]);
+    const favoriteCity = await db.query("SELECT * FROM favorites ORDER BY id", [true]);
     res.send(favoriteCity);
   } catch (e) {
     return res.status(400).json({ e });
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
   console.log([favoriteCity.id, favoriteCity.city_name, favoriteCity.zip_code, favoriteCity.user_id]);
 
   try {
-    const newFavCityEntry = await db.one(
+    const newFavCityEntry = await db.query(
       'INSERT INTO favorites(id, username, city_name, zip_code, user_id) VALUES($1, $2, $3, $4) RETURNING *',
       [favoriteCity.id, favoriteCity.city_name, favoriteCity.zip_code, favoriteCity.user_id],
     );
