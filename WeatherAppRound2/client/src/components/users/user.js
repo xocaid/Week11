@@ -14,8 +14,10 @@ function User() {
 
   const getUsers = async () => {
     const response = await fetch(`http://localhost:5003/users`);
+
     const user = await response.json();
     setUsers(user);
+    console.log('user', user)
   };
   useEffect(() => {
     getUsers();
@@ -28,7 +30,7 @@ function User() {
 
   // //DELETE USER - EVENT HANDLER
   // const handleDeleteContact = async (deleteUserCallback) => {
-  //   const response = await fetch(`http://localhost:3001/users/${deleteUserCallback}`, {
+  //   const response = await fetch(`http://localhost:5003/users/${deleteUserCallback}`, {
   //     method: 'DELETE',
   //   })
   //   await response.json();
@@ -41,16 +43,15 @@ function User() {
 
   return (
     <div>
-      {/* <ul id="users-list">
+      <ul id="users-list">
         {users.map((user, index) => {
           return (
-            <li key={index}> Name: {user.name}, Id: {user.id}, Email: {user.email}
+            <li key={index}> Name: {user.first_name}, Id: {user.id}, Email: {user.email}
             </li>);
         })}
-      </ul> */}
+      </ul>
 
-<h1>hello world</h1>
-[{users.username}]
+      <h1>hello world</h1>
 
       <AddUser addContact={handleAddUser} />
 
