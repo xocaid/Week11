@@ -6,7 +6,7 @@ const router = Router();
 //GET Request - USERS
 router.get("/", async (req, res) => {
   try {
-    const user = await db.query("SELECT * FROM users ORDER BY id", [true]);
+    const user = await db.query("SELECT * FROM users ORDER BY username ASC", [true]);
     res.send(user);
   } catch (e) {
     console.log(e);

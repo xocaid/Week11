@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 const AddUser = (props) => {
   const [userForm, setUserForm] = useState({
-    id: "",
     username: "",
     first_name: "",
     last_name: "",
@@ -10,10 +9,6 @@ const AddUser = (props) => {
   });
 
   //create functions that handle the event of the user typing into the form
-  const handleId = (event) => {
-    const userId = event.target.value;
-    setUserForm((users) => ({ ...users, id: userId }));
-  };
   const handleUsername = (event) => {
     const userUserName = event.target.value;
     setUserForm((users) => ({ ...users, username: userUserName }));
@@ -51,7 +46,6 @@ const AddUser = (props) => {
     e.preventDefault();
     postUser(userForm);
     setUserForm({
-      id: "",
       username: "",
       first_name: "",
       last_name: "",
@@ -60,17 +54,8 @@ const AddUser = (props) => {
   };
 
   return (
-    <form onSubmit={handleAddUser} className="formborder" >
+    <form onSubmit={handleAddUser} className="addform-container" >
       <fieldset>
-        <label>ID: </label>
-        <input
-          type="text"
-          id="add-id"
-          placeholder="ID"
-          value={userForm.id}
-          onChange={handleId}
-        />
-        <br />
 
         <label>Username: </label>
         <input

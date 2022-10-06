@@ -3,9 +3,9 @@ import AddUser from './addUser';
 
 function User() {
   const [users, setUsers] = useState([]);
+  const [seeAddForm, setSeeAddForm] = useState(false);
 
   const values = {
-    id: "",
     username: "",
     first_name: "",
     last_name: "",
@@ -28,7 +28,12 @@ function User() {
     setUsers((user) => [...user, newUser]);
   };
 
-  // //DELETE USER - EVENT HANDLER
+  //SEE ADD FORM - TOGGLE
+  const handleButton = () => {
+    setSeeAddForm(!seeAddForm);
+  };
+
+  //DELETE USER - EVENT HANDLER
   // const handleDeleteContact = async (deleteUserCallback) => {
   //   const response = await fetch(`http://localhost:5003/users/${deleteUserCallback}`, {
   //     method: 'DELETE',
@@ -38,23 +43,26 @@ function User() {
   //   setUsers(deleteUserFunction);
   // };
 
-  //VIEW
+  //SEARCH USER
   // const [viewUserId, setViewUserId] = useState();
 
   return (
     <div>
-      <ul id="users-list">
-        {users.map((user, index) => {
-          return (
-            <li key={index}> Name: {user.first_name}, Id: {user.id}, Email: {user.email}
-            </li>);
-        })}
-      </ul>
+      <div className='users-container'>
+        <h3>Users</h3>
+        <ul id="users">
+          {users.map((user, index) => {
+            return (
+              <li key={index}> {user.username}
+              </li>);
+          })}
+        </ul>
+      </div>
 
-      <h1>hello world</h1>
-
-      <AddUser addContact={handleAddUser} />
-
+      {seeAddForm ? (
+        <AddUser addContact={handleAddUser} />
+      ) : (<button type="viewAdd" onClick={handleButton}>Add User</button>)
+      }
     </div>
   );
 }
