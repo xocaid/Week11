@@ -6,14 +6,12 @@ import Footer from './components/margins/footer';
 
 function App() {
   return (
-    <div className="App">
+    <div className="maincontainer">
       <Header />
-      <User />
-      <div className='weather'>
+        <User />
+        <br />
         <MainWeather />
-      </div>
-
-        <Footer />
+      <Footer />
     </div>
   );
 }

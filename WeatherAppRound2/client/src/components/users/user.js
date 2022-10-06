@@ -47,7 +47,6 @@ function User() {
   const [searchUsers, setSearchUsers] = useState('');
 
   return (
-    <div>
       <div className='users-container'>
         <h3>Users</h3>
 
@@ -73,7 +72,6 @@ function User() {
             );
           })}
         </ul>
-      </div>
 
       {/* See Add Form Button */}
       {seeAddForm ? (

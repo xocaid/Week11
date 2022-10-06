@@ -1,72 +1,107 @@
-.App {
+body {
+  background-color: rgb(82, 0, 82);
+  text-align: left;
+  color: purple;
+  margin: 2em;
+}
+.maincontainer{
+  background-color: rgb(255, 200, 0);
+  border: 10px double white;
+  padding: 5px;
+}
+h1{
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: red;
-}
 /**************  Containers next each other ****************/
-.users-container{
-  /* border: 3px solid green;
-  float: left; 
-  width: 50%;  */
-  background: cyan;
+/* .users-container{
+  background: rgb(255, 200, 0);
   width: fit-content;
   height: auto;
   text-align: left;
   padding-left: 5px;
   flex-direction: 'row';
+  color: purple;
   
-}
-.addform-container{
-  /* margin-left: 50%; 
-  height: 100px; */
+} */
+
+/* .addform-container{
   border: 2px solid red; 
-  background: yellow;
+  background: rgb(255, 200, 0);
   width: fit-content;
   height: auto;
   text-align: left;
-}
+  color: purple;
+} */
 
-.weather{
+/* .weather{
   width: fit-content;
   float:right;
-  background: purple;
+  background: rgb(255, 200, 0);
   width: auto;
   height: auto;
   flex-direction: 'row';
-}
+} */
 
-.weather-day{
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  border-radius: 5px 5px 0 0 ;
-  border:5px double white ;
-  display: inline-block;
+/* .weather-container{
   width: fit-content;
-  padding: 10px;
-  margin: 15px;
+  float:right;
+  background: rgb(255, 200, 0);
+  width: auto;
+  height: auto;
+  flex-direction: 'row';
+} */
+
+.weather-day {
+  background-color: purple;
   color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px 5px 0 0;
+  border: 5px double white;
+  display: inline-block;
+  text-align: center;
+  padding: 15px;
+  margin: 15px;
 }
 
-button[type="viewAdd"]{
-float: left;
-margin:15px;
+button[type="viewAdd"] {
+  float: left;
+  margin: 15px;
 }
+
 /******************* Removes Bullet From List ******************/
-ul{
-  list-style:none;
+ul {
+  list-style: none;
   list-style-position: inside;
-  padding:5px;
+  padding: 5px;
 }
-.icon{
-width:75px;
-height:75px;
+
+.icon {
+  width: 75px;
+  height: 75px;
+}
+
+.city {
+  font-weight: bold;
+}
+
+fieldset {
+  border: none;
+}
+input{
+  border-radius: 5px;
+  border:none;
+  padding: 10px 25px;
+  margin: 5px;
+  color:purple;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: purple;
+  opacity: .5; /* Firefox */
+}
+
+label {
+  display: inline-block;
+  width: 110px;
 }

@@ -9,6 +9,10 @@ const AddUser = (props) => {
   });
 
   //create functions that handle the event of the user typing into the form
+  // const handleUsername = (event) => {
+  //   const userId = event.target.value;
+  //   setUserForm((users) => ({ ...users, username: userId }));
+  // };
   const handleUsername = (event) => {
     const userUserName = event.target.value;
     setUserForm((users) => ({ ...users, username: userUserName }));
