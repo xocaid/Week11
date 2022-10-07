@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react";
-import sunny from "./images/sunny.png"
-import clearSky from "./images/clearSky.png"
-import LikeButton from "./likes";
+import sunny from "../images/sunny.png"
+import clearSky from "../images/clearSky.png"
 
-
-const MainWeather = () => {
+const WeatherCard = () => {
 
   //Weather API Information
   const [zipWeather, setZipWeather] = useState(null);
-
-  //SEARCH BAR - create variable
-  // const [searchInput, setSearchInput] = useState('');
 
   // FETCH Request
   const loadData = () => {
@@ -76,9 +71,8 @@ const MainWeather = () => {
           <li>Sunset {new Date(zipWeather.list[2].sunset).toUTCString().slice(-12, -4)}PM</li>
           <li>Feels Like {zipWeather.list[2].feels_like.day}</li>
         </ul>
-        <LikeButton/>
       </div>
     )
   }
 }
-export default MainWeather;
+export default WeatherCard;

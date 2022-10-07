@@ -4,54 +4,18 @@ body {
   color: purple;
   margin: 2em;
 }
+
+h1{
+  text-align: center;
+}
+
+/******************* Container for Users & Weather ******************/
 .maincontainer{
   background-color: rgb(255, 200, 0);
   border: 10px double white;
   padding: 5px;
 }
-h1{
-  text-align: center;
-}
-
-/**************  Containers next each other ****************/
-/* .users-container{
-  background: rgb(255, 200, 0);
-  width: fit-content;
-  height: auto;
-  text-align: left;
-  padding-left: 5px;
-  flex-direction: 'row';
-  color: purple;
-  
-} */
-
-/* .addform-container{
-  border: 2px solid red; 
-  background: rgb(255, 200, 0);
-  width: fit-content;
-  height: auto;
-  text-align: left;
-  color: purple;
-} */
-
-/* .weather{
-  width: fit-content;
-  float:right;
-  background: rgb(255, 200, 0);
-  width: auto;
-  height: auto;
-  flex-direction: 'row';
-} */
-
-/* .weather-container{
-  width: fit-content;
-  float:right;
-  background: rgb(255, 200, 0);
-  width: auto;
-  height: auto;
-  flex-direction: 'row';
-} */
-
+/******************* Daily Weather Containers ******************/
 .weather-day {
   background-color: purple;
   color: white;
@@ -63,24 +27,38 @@ h1{
   text-align: center;
   padding: 15px;
   margin: 15px;
+  font-size: 20px;
+  line-height: 35px;
+  
 }
-
+/******************* Button ******************/
 button[type="viewAdd"] {
   float: left;
   margin: 15px;
+  background-color: purple;
+  border-radius: 10px;
+  border: none;
+  color:white;
+  padding: 10px;
+  transition-duration: 0.4s;
+  font-size: 15px;
 }
 
-/******************* Removes Bullet From List ******************/
+button[type="viewAdd"]:hover{
+  background-color: rgb(192, 68, 192);
+  }
+/******************* List Items - Removes Bullet Point ******************/
 ul {
   list-style: none;
   list-style-position: inside;
   padding: 5px;
 }
-
+/******************* Icons ******************/
 .icon {
   width: 75px;
   height: 75px;
 }
+
 .favicon {
   width: 50px;
   height: 50px;
@@ -89,10 +67,11 @@ ul {
 .city {
   font-weight: bold;
 }
-
+/******************* Form & Search Bar ******************/
 fieldset {
   border: none;
 }
+
 input{
   border-radius: 5px;
   border:none;
@@ -100,9 +79,10 @@ input{
   margin: 5px;
   color:purple;
 }
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+
+::placeholder {
   color: purple;
-  opacity: .5; /* Firefox */
+  opacity: .5;
 }
 
 label {

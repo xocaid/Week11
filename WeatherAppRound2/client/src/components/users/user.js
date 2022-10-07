@@ -4,9 +4,11 @@ import AddUser from './addUser';
 function User() {
   const [users, setUsers] = useState([]);
   const [seeAddForm, setSeeAddForm] = useState(false);
+  const [viewUserWeather, setViewUserWeather] = useState(true);
+
 
   const values = {
-    id:"",
+    id: "",
     username: "",
     first_name: "",
     last_name: "",
@@ -21,7 +23,7 @@ function User() {
         console.log('user', user)
       });
   }, []);
-  
+
   //Code works too
   // const getUsers = async () => {
   //   const response = await fetch(`http://localhost:5003/users`);
@@ -44,6 +46,13 @@ function User() {
     setSeeAddForm(!seeAddForm);
   };
 
+  //SEE USERS INFO - TOGGLE
+  const handleView = () => {
+    setViewUserWeather(!viewUserWeather);
+  }
+
+
+
   //DELETE USER - EVENT HANDLER
   // const handleDeleteContact = async (deleteUserCallback) => {
   //   const response = await fetch(`http://localhost:5003/users/${deleteUserCallback}`, {
@@ -58,16 +67,19 @@ function User() {
   const [searchUsers, setSearchUsers] = useState('');
 
   return (
-      <div className='users-container'>
-        <h3>Users</h3>
+    <div className='users-container'>
+      <h3>Users</h3>
 
-        {/* Search Bar  */}
-        <input
-          type="text"
-          placeholder="Search Users..."
-          onChange={(e) => { setSearchUsers(e.target.value) }}
-        />
-        {/* Search Filter,  Username List Mapped */}
+      {/* Search Bar  */}
+      <input
+        type="text"
+        placeholder="Search Users..."
+        onChange={(e) => { setSearchUsers(e.target.value) }}
+      />
+      {/* Search Filter,  Username List Mapped */}
+
+
+      {viewUserWeather ? (
         <ul id="users">
           {users.filter((value) => {
             if (searchUsers === "") {
@@ -77,12 +89,17 @@ function User() {
             }
           }).map((user, index) => {
             return (
-              <li key={index}>
+              <li key={index} onClick={handleView}>
                 {user.username}
               </li>
             );
           })}
         </ul>
+      ) : (
+        <h3>Favorite Weather</h3>
+
+
+      )}
 
       {/* See Add Form Button */}
       {seeAddForm ? (
