@@ -8,7 +8,7 @@ import db from "./db/db-connection.js";
 import contactsRouter from "./routes/contacts.js";
 
 const app = express();
-const PORT = 5002;
+const PORT = 4002;
 
 app.use(cors());
 //Body Parser: Process data sent in an HTTP request body aka  the req.body

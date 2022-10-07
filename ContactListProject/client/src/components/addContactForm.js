@@ -40,7 +40,7 @@ const AddContactForm = (props) => {
 
   //A function to handle the post request
   const postContact = (newContact) => {
-    return fetch("http://localhost:5002/contacts", {
+    return fetch("http://localhost:4002/contacts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newContact),

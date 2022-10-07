@@ -3,11 +3,10 @@
 }
 body{
   background-color: rgb(210, 186, 255);
-  color:#9d1235;
+  color:#c40737;
+  font-size: 20px;
 }
-header{
-  background-color: #9d1235;
-}
+
 
 /******************** BUTTONS **********************/
 button{
@@ -17,6 +16,8 @@ button{
   color:white;
   border-radius: 5px;
   margin: 5px;
+  font-size: 15px;
+  font-weight: bold;
 }
 /*Button Hover */
 button:hover {
@@ -63,4 +64,11 @@ input{
 fieldset{
   border: none;
   text-align: left;
+}
+.icon{
+  height:10%;
+  width:10%;
+}
+table{
+  border-spacing: 15px 1rem;
 }

@@ -1,13 +1,9 @@
 import { useState, useReducer, useEffect } from "react";
-
+import addUser from "./addUser.png"
 
 const reducer = (state, action) => {
   console.log(action, 'this is the action');
   switch (action.type) {
-    case 'editId':
-      console.log('Logged if the editId action is being dispatched');
-      return { ...state, id: action.payload };
-
     case 'editFirstName':
       console.log('Logged if the editLastName action is being dispatched');
       return { ...state, first_name: action.payload };
@@ -29,7 +25,6 @@ const reducer = (state, action) => {
 
     case 'clearForm':
       return {
-        id: "",
         first_name: "",
         last_name: "",
         email: "",
@@ -44,9 +39,16 @@ const reducer = (state, action) => {
 
 const ContactList = () => {
   const [individualContact, setIndividualContact] = useState([]);
+  //DISPLAY Button for Add Form
+  const [seeAddForm, setSeeAddForm] = useState(false);
+  //SEARCH BAR 
+  const [searchInput, setSearchInput] = useState('');
+  //VIEW Contact
+  const [viewContactId, setViewContactId] = useState('');
+
 
   const getIndividualContact = async () => {
-    const response = await fetch('http://localhost:5002/contacts');
+    const response = await fetch('http://localhost:4002/contacts');
     const individualContact = await response.json();
     setIndividualContact(individualContact);
   };
@@ -58,7 +60,6 @@ const ContactList = () => {
   //const initialState is associated with useReducer below(const [state, dispatch = useReducer(reducer, initialState)])
   //initialState needs to be declared for useReducer
   const initialState = {
-    id: "",
     first_name: "",
     last_name: "",
     email: "",
@@ -72,7 +73,6 @@ const ContactList = () => {
   const handleAddIndivdualContact = async (e) => {
     e.preventDefault();
     const newIndividualContact = {
-      id: state.id,
       first_name: state.first_name,
       last_name: state.last_name,
       email: state.email,
@@ -81,7 +81,7 @@ const ContactList = () => {
     };
     setSearchInput(e.target.value);
 
-    const response = await fetch('http://localhost:5002/contacts', {
+    const response = await fetch('http://localhost:4002/contacts', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -96,20 +96,23 @@ const ContactList = () => {
 
   // DELETE EVENT  - EVENT HANDLER
   const handleDeleteContact = async (dltContactCallback) => {
-    const response = await fetch(`http://localhost:5002/contacts/${dltContactCallback}`, {
+    const response = await fetch(`http://localhost:4002/contacts/${dltContactCallback}`, {
       method: 'DELETE',
     })
     await response.json();
     const deleteContactFunction = individualContact.filter((i) => i.id !== dltContactCallback);
     setIndividualContact(deleteContactFunction);
   }
-  //VIEW
-  const [viewContactId, setViewContactId] = useState('');
 
-  //SEARCH BAR - create variable
-  const [searchInput, setSearchInput] = useState('');
+  //TOGGLE - Add Contact Form BUTTON
+  const handleButton = () => {
+    setSeeAddForm(!seeAddForm);
+  };
 
-
+  //TOGGLE - Table Headers
+  const handleView = () =>{
+    setViewContactId(!viewContactId);
+  }
 
   return (
     <section className="listofcontacts-page">
@@ -128,20 +131,20 @@ const ContactList = () => {
             <tr className='table-heading'>
               {/* Instead of listing each individual header, map it out. */}
               {/* If/else can't be used so had to use && as per googling, it's working*/}
-              {viewContactId != '' &&
-                ['ID', 'First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', '', ''].map((item) => (
+              {viewContactId !== '' &&
+                ['First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', '', ''].map((item) => (
                   <th key={item}>
                     {item}
                   </th>
                 ))
-              ||
-              viewContactId === '' &&
-                ['ID', 'First Name', 'Last Name', ''].map((item) => (
+                ||
+                viewContactId === '' &&
+                ['First Name', 'Last Name', ''].map((item) => (
                   <th key={item}>
                     {item}
                   </th>
                 ))
-                }
+              }
             </tr>
           </thead>
 
@@ -149,7 +152,7 @@ const ContactList = () => {
             {/* DISPLAY CONTACTS LIST */}
             {/* FILTER FOR SEARCH INPUT - first & last name, email, phone# */}
             {individualContact.filter((value) => {
-              if (searchInput == "") {
+              if (searchInput === "") {
                 return value
               } else if (value.first_name.toLowerCase().includes(searchInput.toLowerCase()) || value.last_name.toLowerCase().includes(searchInput.toLowerCase()) || value.email.toLowerCase().includes(searchInput.toLowerCase()) || value.phone_number.toLowerCase().includes(searchInput.toLowerCase())) {
                 return value
@@ -158,7 +161,6 @@ const ContactList = () => {
               if (contact.id === viewContactId) {
                 return (
                   <tr key={index}>
-                    <td>{contact.id} </td>
                     <td> {contact.first_name} </td>
                     <td> {contact.last_name} </td>
                     <td>{contact.email} </td>
@@ -170,7 +172,6 @@ const ContactList = () => {
               } else {
                 return (
                   <tr key={index}>
-                    <td>{contact.id} </td>
                     <td> {contact.first_name} </td>
                     <td> {contact.last_name} </td>
                     {/* <td>{contact.email} </td>
@@ -185,104 +186,98 @@ const ContactList = () => {
           </tbody>
         </table>
 
+        {/* See Add Contact Form Button */}
+        {seeAddForm ? (
 
+          <div className="AddContactDiv">
+            <h3>Add Contact</h3>
+            <form id="add-contact" className="formborder" action="#" onSubmit={handleAddIndivdualContact}>
+              <fieldset>
 
-        <div className="AddContactDiv">
-          <h3>Add Contact</h3>
-          <form id="add-contact" className="formborder" action="#" onSubmit={handleAddIndivdualContact}>
-            <fieldset>
-              <label>ID: </label>
-              <input
-                type="text"
-                id="editId"
-                placeholder="Contact ID"
-                value={state.id}
-                onChange={(e) =>
-                  dispatch({
-                    type: "editId",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <br />
+                <label>First Name: </label>
+                <input
+                  type="text"
+                  id="editFirstName"
+                  placeholder="Jane"
+                  value={state.first_name}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "editFirstName",
+                      payload: e.target.value,
+                    })
+                  }
+                />
+                <br />
+                <label>Last Name: </label>
+                <input
+                  type="text"
+                  id="editLastName"
+                  placeholder="Smith"
+                  value={state.last_name}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "editLastName",
+                      payload: e.target.value,
+                    })
+                  }
+                />
+                <br />
 
-              <label>First Name: </label>
-              <input
-                type="text"
-                id="editFirstName"
-                placeholder="Jane"
-                value={state.first_name}
-                onChange={(e) =>
-                  dispatch({
-                    type: "editFirstName",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <br />
-              <label>Last Name: </label>
-              <input
-                type="text"
-                id="editLastName"
-                placeholder="Smith"
-                value={state.last_name}
-                onChange={(e) =>
-                  dispatch({
-                    type: "editLastName",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <br />
+                <label>Email: </label>
+                <input
+                  type="text"
+                  id="editEmail"
+                  placeholder="jsmith@gmail.com"
+                  value={state.email}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "editEmail",
+                      payload: e.target.value,
+                    })
+                  }
+                />
+                <br />
 
-              <label>Email: </label>
-              <input
-                type="text"
-                id="editEmail"
-                placeholder="jsmith@gmail.com"
-                value={state.email}
-                onChange={(e) =>
-                  dispatch({
-                    type: "editEmail",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <br />
+                <label>Phone Number: </label>
+                <input
+                  type="text"
+                  id="editPhoneNumber"
+                  placeholder="(123)555-4567"
+                  value={state.phone_number}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "editPhoneNumber",
+                      payload: e.target.value,
+                    })
+                  }
+                />
+                <br />
 
-              <label>Phone Number: </label>
-              <input
-                type="text"
-                id="editPhoneNumber"
-                placeholder="(123)555-4567"
-                value={state.phone_number}
-                onChange={(e) =>
-                  dispatch({
-                    type: "editPhoneNumber",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <br />
+                <label>Notes: </label>
+                <input
+                  type="text"
+                  id="editNotes"
+                  value={state.notes}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "editNotes",
+                      payload: e.target.value,
+                    })
+                  }
+                />
+                <br />
 
-              <label>Notes: </label>
-              <input
-                type="text"
-                id="editNotes"
-                value={state.notes}
-                onChange={(e) =>
-                  dispatch({
-                    type: "editNotes",
-                    payload: e.target.value,
-                  })
-                }
-              />
-              <br />
-
-            </fieldset>
-            <input type="submit" value="Add Individual" />
-          </form>
-        </div>
+              </fieldset>
+              <input type="submit" value="Add Individual" />
+            </form>
+            <button onClick={handleButton}> Close</button>
+          </div>
+        ) : (
+          <div>
+            <br />
+            <img src={addUser} className="icon" alt="add-user" onClick={handleButton} />
+          </div>
+        )}
       </div>
     </section>
   )

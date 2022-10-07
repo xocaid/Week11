@@ -6,7 +6,7 @@ const router = Router();
 //GET Request - Contacts
 router.get("/", async (req, res) => {
   try {
-    const contacts = await db.any("SELECT * FROM contacts ORDER BY id", [true]);
+    const contacts = await db.any("SELECT * FROM contacts ORDER BY first_name ASC", [true]);
     res.send(contacts);
   } catch (e) {
     return res.status(400).json({ e });
@@ -17,19 +17,18 @@ router.get("/", async (req, res) => {
 //POST Request - Contacts
 router.post('/', async (req, res) => {
   const contact = {
-    id: req.body.id,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email,
     phone_number: req.body.phone_number,
     notes: req.body.notes
   };
-  console.log([contact.id, contact.first_name, contact.last_name, contact.email, contact.phone_number, contact.notes]);
+  console.log([contact.first_name, contact.last_name, contact.email, contact.phone_number, contact.notes]);
 
   try {
     const createdContact = await db.one(
-      'INSERT INTO contacts(id, first_name, last_name, email, phone_number,notes) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
-      [contact.id, contact.first_name, contact.last_name, contact.email, contact.phone_number, contact.notes],
+      'INSERT INTO contacts(first_name, last_name, email, phone_number,notes) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+      [contact.first_name, contact.last_name, contact.email, contact.phone_number, contact.notes],
     );
     console.log(createdContact);
     res.send(createdContact);
