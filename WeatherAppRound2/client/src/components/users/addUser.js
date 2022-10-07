@@ -84,7 +84,7 @@ const AddUser = (props) => {
           placeholder="John"
           required
           value={userForm.first_name}
-          onChange={handleFirstName.toLowerCase()}
+          onChange={handleFirstName}
         />
         <br />
 
@@ -94,7 +94,7 @@ const AddUser = (props) => {
           id="add-last-name"
           placeholder="Smith"
           value={userForm.last_name}
-          onChange={handleLastName.toLowerCase()}
+          onChange={handleLastName}
         />
         <br />
 

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import AddUser from './addUser';
+import ViewUserWeather from '../weather/viewUserWeatherCard';
+
 
 function User() {
   const [users, setUsers] = useState([]);
@@ -96,8 +98,11 @@ function User() {
           })}
         </ul>
       ) : (
-        <h3>Favorite Weather</h3>
-
+        <div>
+          <h3>Favorite Weather</h3>
+<ViewUserWeather />
+          <button onClick={handleView}>Close</button>
+        </div>
 
       )}
 

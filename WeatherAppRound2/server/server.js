@@ -27,10 +27,22 @@ app.get('/', (req, res) => {
 //Displays 2 days by ZIP CODE
 const MY_KEY = process.env.REACT_APP_API_KEY;
 
+//DEFAULT LOCATION 
 app.get('/weather', (req, res) => {
   const url = `https://api.openweathermap.org/data/2.5/forecast/daily?zip=90016,us&APPID=${MY_KEY}&units=imperial&cnt=3`;
 
   fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      res.send(data);
+    });
+})
+
+//FAVORITE LOCATION 
+app.get('/favorite', (req, res) => {
+  const favoriteURL = `https://api.openweathermap.org/data/2.5/forecast/daily?zip=53511,us&APPID=${MY_KEY}&units=imperial&cnt=3`;
+
+  fetch(favoriteURL)
     .then((response) => response.json())
     .then((data) => {
       res.send(data);
