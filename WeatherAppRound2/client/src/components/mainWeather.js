@@ -76,7 +76,6 @@ const MainWeather = () => {
           <li>Sunset {new Date(zipWeather.list[2].sunset).toUTCString().slice(-12, -4)}PM</li>
           <li>Feels Like {zipWeather.list[2].feels_like.day}</li>
         </ul>
-
         <LikeButton/>
       </div>
     )

@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 const AddUser = (props) => {
   const [userForm, setUserForm] = useState({
+    // id:"",
     username: "",
     first_name: "",
     last_name: "",
@@ -9,25 +10,29 @@ const AddUser = (props) => {
   });
 
   //create functions that handle the event of the user typing into the form
-  // const handleUsername = (event) => {
+  // const handleId = (event) => {
   //   const userId = event.target.value;
-  //   setUserForm((users) => ({ ...users, username: userId }));
+  //   setUserForm((users) => ({ ...users, id: userId }));
   // };
   const handleUsername = (event) => {
     const userUserName = event.target.value;
     setUserForm((users) => ({ ...users, username: userUserName }));
+    console.log(userUserName);
   };
   const handleFirstName = (event) => {
     const userFirstName = event.target.value;
     setUserForm((users) => ({ ...users, first_name: userFirstName }));
+    console.log(userFirstName);
   };
   const handleLastName = (event) => {
     const userLastName = event.target.value;
     setUserForm((users) => ({ ...users, last_name: userLastName }));
+    console.log(userLastName);
   };
   const handleEmail = (event) => {
     const userEmail = event.target.value;
     setUserForm((users) => ({ ...users, email: userEmail }));
+    console.log(userEmail);
   };
 
   //A function to handle the post request
@@ -92,6 +97,7 @@ const AddUser = (props) => {
           onChange={handleLastName}
         />
         <br />
+
         <label>Email: </label>
         <input
           type="text"
@@ -101,6 +107,7 @@ const AddUser = (props) => {
           value={userForm.email}
           onChange={handleEmail}
         />
+
       </fieldset>
       <button type="submit">Add</button>
     </form>

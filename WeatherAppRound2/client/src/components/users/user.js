@@ -6,25 +6,36 @@ function User() {
   const [seeAddForm, setSeeAddForm] = useState(false);
 
   const values = {
+    id:"",
     username: "",
     first_name: "",
     last_name: "",
     email: ""
   };
 
-  const getUsers = async () => {
-    const response = await fetch(`http://localhost:5003/users`);
-
-    const user = await response.json();
-    setUsers(user);
-    console.log('user', user)
-  };
   useEffect(() => {
-    getUsers();
+    fetch("http://localhost:5003/users")
+      .then((response) => response.json())
+      .then((user) => {
+        setUsers(user);
+        console.log('user', user)
+      });
   }, []);
+  
+  //Code works too
+  // const getUsers = async () => {
+  //   const response = await fetch(`http://localhost:5003/users`);
+
+  //   const user = await response.json();
+  //   setUsers(user);
+  //   console.log('user', user)
+  // };
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
 
   //ADD USER - EVENT HANDLER
-  const handleAddUser = (newUser) => {
+  const handleAddUserP = (newUser) => {
     setUsers((user) => [...user, newUser]);
   };
 
@@ -75,7 +86,7 @@ function User() {
 
       {/* See Add Form Button */}
       {seeAddForm ? (
-        <AddUser addContact={handleAddUser} />
+        <AddUser addUser={handleAddUserP} />
       ) : (<button type="viewAdd" onClick={handleButton}>Add User</button>)
       }
     </div>

@@ -17,18 +17,17 @@ router.get("/", async (req, res) => {
 //POST Request - USERS
 router.post('/', async (req, res) => {
   const user = {
-    id: req.body.id,
     username: req.body.username,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email
   };
-  console.log([user.id, user.username, user.first_name, user.last_name, user.email]);
+  console.log([user.username, user.first_name, user.last_name, user.email]);
 
   try {
     const createdUser = await db.query(
-      'INSERT INTO users(id, username, first_name, last_name, email) VALUES($1, $2, $3, $4, $5) RETURNING *',
-      [user.id, user.username, user.first_name, user.last_name, user.email],
+      'INSERT INTO users(username, first_name, last_name, email) VALUES($1, $2, $3, $4) RETURNING *',
+      [user.username, user.first_name, user.last_name, user.email],
     );
     console.log(createdUser);
     res.send(createdUser);

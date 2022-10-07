@@ -6,6 +6,7 @@ const LikeButton = () => {
 
   const [liked, setLiked] = useState(false);
 
+  //Toggle Liked/Not Liked
   const handleLike = () => {
     setLiked(!liked);
   }
@@ -13,8 +14,8 @@ const LikeButton = () => {
   return (
     <div>
       {liked ? (
-        <img src={heart} className="icon" alt="favorites" onClick={handleLike} />
-      ) : (<img src={notLiked} className="icon" alt="notfavorites" onClick={handleLike} />)
+        <img src={heart} className="favicon" alt="favorites" onClick={handleLike} />
+      ) : (<img src={notLiked} className="favicon" alt="notfavorites" onClick={handleLike} />)
       }
 
     </div>
