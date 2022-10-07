@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import rainy from "../images/rainy.png";
+import scatteredClouds from "../images/scatteredClouds.png";
+import cloudy from "../images/cloudy.png";
 
-const ViewUserWeather = () => {
+const ViewFavWeather = () => {
 
   const [favWeather, setFavWeather] = useState(null)
   // const [viewUserWeather, setViewUserWeather] = useState(false);
@@ -35,10 +38,11 @@ const ViewUserWeather = () => {
 
     return (
       <div>
+
         <h1>{favWeather.city.name}</h1>
 
         <ul className="weather-day" id="1">
-          {/* <li><img src={sunny} className="icon" alt="sunny" /></li> */}
+          <li><img src={rainy} className="icon" alt="rainy" /></li>
           <br />
           <li>{favWeather.list[0].weather[0].description}</li>
           <li className="city">{favWeather.city.name}<br /></li>
@@ -51,7 +55,7 @@ const ViewUserWeather = () => {
         </ul>
 
         <ul className="weather-day" id="2">
-          {/* <li><img src={clearSky} className="icon" alt="clearSky" /></li> */}
+          <li><img src={scatteredClouds} className="icon" alt="scatteredClouds" /></li>
           <br />
           <li>{favWeather.list[1].weather[0].description}</li>
           <li className="city">{favWeather.city.name}<br /></li>
@@ -64,7 +68,7 @@ const ViewUserWeather = () => {
         </ul>
 
         <ul className="weather-day" id="3">
-          {/* <li><img src={clearSky} className="icon" alt="clearSky" /></li> */}
+          <li><img src={cloudy} className="icon" alt="cloudy" /></li>
           <br />
           <li>{favWeather.list[2].weather[0].description}</li>
           <li className="city">{favWeather.city.name}<br /></li>
@@ -79,4 +83,4 @@ const ViewUserWeather = () => {
     )
   }
 }
-export default ViewUserWeather;
+export default ViewFavWeather;

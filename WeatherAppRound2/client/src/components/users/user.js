@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import AddUser from './addUser';
-import ViewUserWeather from '../weather/viewUserWeatherCard';
+import ViewFavWeather from '../weather/viewFavWeatherCard';
 
 
 function User() {
@@ -99,16 +99,18 @@ function User() {
         </ul>
       ) : (
         <div>
-          <h3>Favorite Weather</h3>
-<ViewUserWeather />
+          <h1 >Favorite Weather</h1>
+          <ViewFavWeather />
           <button onClick={handleView}>Close</button>
         </div>
-
       )}
 
       {/* See Add Form Button */}
       {seeAddForm ? (
-        <AddUser addUser={handleAddUserP} />
+        <div>
+        <AddUser addUser={handleAddUserP} /> 
+        <button onClick={handleButton}>Back</button>
+        </div>
       ) : (<button type="viewAdd" onClick={handleButton}>Add User</button>)
       }
     </div>
