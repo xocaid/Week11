@@ -71,5 +71,9 @@ fieldset{
 }
 table{
   border-spacing: 25px 1rem;
-
+}
+li{
+  list-style: none;
+  display: inline-block;
+  padding: 5px;
 }
