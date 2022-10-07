@@ -44,7 +44,7 @@ const ContactList = () => {
   //SEARCH BAR 
   const [searchInput, setSearchInput] = useState('');
   //VIEW Contact
-  const [viewContactId, setViewContactId] = useState('');
+  const [viewContactId, setViewContactId] = useState(false);
 
 
   const getIndividualContact = async () => {
@@ -104,61 +104,47 @@ const ContactList = () => {
     setIndividualContact(deleteContactFunction);
   }
 
+
   //TOGGLE - Add Contact Form BUTTON
   const handleButton = () => {
     setSeeAddForm(!seeAddForm);
   };
 
-  //TOGGLE - Table Headers
-  const handleView = () =>{
+  //TOGGLE - View Contact INfo
+  const handleView = () => {
     setViewContactId(!viewContactId);
-  }
+  };
 
   return (
     <section className="listofcontacts-page">
-      <h2>List of Contacts</h2>
       <div>
-        <h3>All Individuals</h3>
-
         <input
           type="text"
           placeholder="Search..."
           onChange={(e) => { setSearchInput(e.target.value) }}
         />
+        {viewContactId ? (
+          <div>
+            <table className="listofcontacts-table">
+              <thead>
+                <tr className="table-heading">
+                  {['First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', ''].map((item) => (
+                    <th key ={item}>
+                      {item}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
 
-        <table className="listofcontacts-table">
-          <thead>
-            <tr className='table-heading'>
-              {/* Instead of listing each individual header, map it out. */}
-              {/* If/else can't be used so had to use && as per googling, it's working*/}
-              {viewContactId !== '' &&
-                ['First Name', 'Last Name', 'Email', 'Phone Number', 'Notes', '', ''].map((item) => (
-                  <th key={item}>
-                    {item}
-                  </th>
-                ))
-                ||
-                viewContactId === '' &&
-                ['First Name', 'Last Name', ''].map((item) => (
-                  <th key={item}>
-                    {item}
-                  </th>
-                ))
-              }
-            </tr>
-          </thead>
+              <tbody>
 
-          <tbody>
-            {/* DISPLAY CONTACTS LIST */}
-            {/* FILTER FOR SEARCH INPUT - first & last name, email, phone# */}
-            {individualContact.filter((value) => {
+              {individualContact.filter((value) => {
               if (searchInput === "") {
                 return value
               } else if (value.first_name.toLowerCase().includes(searchInput.toLowerCase()) || value.last_name.toLowerCase().includes(searchInput.toLowerCase()) || value.email.toLowerCase().includes(searchInput.toLowerCase()) || value.phone_number.toLowerCase().includes(searchInput.toLowerCase())) {
                 return value
               }
             }).map((contact, index) => {
-              if (contact.id === viewContactId) {
                 return (
                   <tr key={index}>
                     <td> {contact.first_name} </td>
@@ -166,25 +152,50 @@ const ContactList = () => {
                     <td>{contact.email} </td>
                     <td>{contact.phone_number} </td>
                     <td> {contact.notes} </td>
-                    <td><button onClick={() => setViewContactId('')}>View</button></td>
+                    <td><button onClick={() => setViewContactId(handleView)}>View</button></td>
                   </tr>
-                );
-              } else {
+            )})}
+
+              </tbody>
+            </table>
+          </div>
+        ) :
+          (
+            <div>
+            <table className="listofcontacts-table">
+              <thead>
+                <tr className="table-heading">
+                  {['First Name', 'Last Name',  ''].map((item) => (
+                    <th key ={item}>
+                      {item}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+
+              <tbody>
+
+              {individualContact.filter((value) => {
+              if (searchInput === "") {
+                return value
+              } else if (value.first_name.toLowerCase().includes(searchInput.toLowerCase()) || value.last_name.toLowerCase().includes(searchInput.toLowerCase()) || value.email.toLowerCase().includes(searchInput.toLowerCase()) || value.phone_number.toLowerCase().includes(searchInput.toLowerCase())) {
+                return value
+              }
+            }).map((contact, index) => {
                 return (
                   <tr key={index}>
                     <td> {contact.first_name} </td>
                     <td> {contact.last_name} </td>
-                    {/* <td>{contact.email} </td>
-                  <td>{contact.phone_number} </td>
-                  <td> {contact.notes} </td> */}
                     <td> <button className="delete-button" onClick={() => handleDeleteContact(contact.id)}>Delete</button> <button>Edit</button> </td>
-                    <td><button onClick={() => setViewContactId(contact.id)}>View</button></td>
+                    <td><button onClick={() => setViewContactId(handleView)}>View</button></td>
                   </tr>
-                );
-              };
-            })}
-          </tbody>
-        </table>
+            )})}
+
+              </tbody>
+            </table>
+            </div>
+          )
+        }
 
         {/* See Add Contact Form Button */}
         {seeAddForm ? (
