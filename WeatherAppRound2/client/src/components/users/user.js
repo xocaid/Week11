@@ -3,7 +3,7 @@ import AddUser from './addUser';
 import ViewFavWeather from '../weather/viewFavWeatherCard';
 
 
-function User() {
+const User=() => {
   const [users, setUsers] = useState([]);
   const [seeAddForm, setSeeAddForm] = useState(false);
   const [viewUserWeather, setViewUserWeather] = useState(true);
@@ -80,7 +80,6 @@ function User() {
       />
       {/* Search Filter,  Username List Mapped */}
 
-
       {viewUserWeather ? (
         <ul id="users">
           {users.filter((value) => {
@@ -99,9 +98,9 @@ function User() {
         </ul>
       ) : (
         <div>
-          <h1 >Favorite Weather</h1>
+          <h1 >Favorite Weather </h1>
           <ViewFavWeather />
-          <button onClick={handleView}>Close</button>
+          <button onClick={handleView}>Back to Users List</button>
         </div>
       )}
 

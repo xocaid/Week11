@@ -9,6 +9,7 @@ import fetch from "node-fetch";
 import db from './db/db-connection.js';
 import usersRouter from './routes/users.js';
 import favoritesRouter from './routes/favorites.js';
+import imagesRouter from './routes/images.js';
 
 const app = express();
 const PORT = 5003;
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/users', (usersRouter));
 app.use('/favorites', (favoritesRouter));
+app.use('/images', (imagesRouter));
 
 
 app.get('/', (req, res) => {

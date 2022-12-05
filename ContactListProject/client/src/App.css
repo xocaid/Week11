@@ -1,79 +1,95 @@
 .App {
   text-align: center;
 }
-body{
+
+body {
   background-color: rgb(210, 186, 255);
-  color:#c40737;
+  color: #c40737;
   font-size: 20px;
 }
 
 
 /******************** BUTTONS **********************/
-button{
-  background-color:  #ea89a1;
+button {
+  background-color: #ea89a1;
   border: #ea89a1;
   padding: 10px 25px;
-  color:white;
+  color: white;
   border-radius: 5px;
   margin: 5px;
   font-size: 15px;
   font-weight: bold;
 }
+
 /*Button Hover */
 button:hover {
   background-color: #c50031;
   color: white;
 }
+
 /* Submit */
 input[type=submit] {
   background-color: #ea89a1;
   border: #ea89a1;
-  color:white;
+  color: white;
   padding: 10px 25px;
   border-radius: 5px;
 }
+
 /*Submit Hover */
 input[type=submit]:hover {
   background-color: #c50031;
   color: white;
 }
+
 /**********************   ****************************/
 label {
   display: inline-block;
   width: 110px;
   text-align: left;
 }
-input{
+
+input {
   border-radius: 5px;
-  border:none;
+  border: none;
   padding: 10px 25px;
   margin: 5px;
-  color:#c50031;
-}
-/****************** Placeholder Text **********************/
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #924d5e;
-  opacity: 1; /* Firefox */
+  color: #c50031;
 }
 
-.AddContactDiv{
+/****************** Placeholder Text **********************/
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #924d5e;
+  opacity: 1;
+  /* Firefox */
+}
+
+.AddContactDiv {
   border: 5px solid #ea89a1;
   margin-top: 15px;
   text-align: left;
 }
-fieldset{
+
+fieldset {
   border: none;
   text-align: left;
 }
-.icon{
-  height:7%;
-  width:7%;
+
+.icon {
+  height: 7%;
+  width: 7%;
 }
-table{
+
+table {
   border-spacing: 25px 1rem;
 }
-li{
+
+li {
   list-style: none;
   display: inline-block;
   padding: 5px;
+}
+.post{
+  border: 1px solid black
 }
